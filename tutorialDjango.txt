@@ -1,0 +1,284 @@
+Django rest full api
+atomica transaciones atomicas.
+
+
+run server: python manage.py runserver
+
+make a change un db structure:
+1. python manage.py makemigrations music
+2. python manage.py migrate
+
+other:
+1.5. python manage.py sqlmigrate music 0001
+
+shell of python db: python manage.py shell
+	from music.models import Album, Song
+	Album.objects.all()
+	>>> a=Album(artist="Taylor Swift", album_title="red", genre="country", album_log
+	o="https://avatars2.githubusercontent.com/u/12706692?v=3&s=200")
+	>>> a.save()
+	>>> a.artist
+	'Taylor Swift'
+	>>> a.album_title
+	'red'
+	>>> a.id
+	1
+	>>> a.pk
+	1
+	>>> b= Album()
+	>>> b.artist= "pep"
+	>>> b.album_title = "penelope"
+	>>> b.genre = "rock"
+	>>> b.album_logo = ""
+	>>> b.save
+	<bound method Album.save of <Album: Album object>>
+	>>> b.save()
+	>>> b.artist
+	'pep'
+	--- Tutorial 10---
+	>>> from music.models import Album, Song
+	>>> Album.objects.all()
+	<QuerySet [<Album: red - Taylor Swift>, <Album: penelope - pep>]>
+	>>> Album.objects.filter(id=1)
+	<QuerySet [<Album: red - Taylor Swift>]>
+	>>> Album.objects.filter(id=2)
+	<QuerySet [<Album: penelope - pep>]>
+	>>> Album.objects.filter(id=3)
+	<QuerySet []>
+	>>> Album.objects.filter(artist__startswith='Taylor')
+	<QuerySet [<Album: red - Taylor Swift>]>
+
+TUTO 11 - Admin interface.
+C:\Users\pc\PycharmProjects\website>python manage.py createsuperuser
+Username (leave blank to use 'pc'): admin
+Email address: admin@example.com
+Password:
+Password (again):
+This password is too short. It must contain at least 8 characters.
+This password is too common.
+This password is entirely numeric.
+Password: oscarpol
+Password (again):
+Superuser created successfully.
+
+TUTO 17: 
+>>> from music.models import Album, Song
+>>> album1 = Album.objects.get(pk=1)
+>>> album1.artist
+'Taylor Swift'
+>>> song = Song()
+>>> song.album = album1
+>>> song.file_type = 'mp3'
+>>> song.song_title = 'I hate my bf'
+>>> song.save()
+>>>
+
+TUTO 18: Related objects set
+>>> album1.song_set.all()
+<QuerySet [<Song: I hate my bf>]>
+>>> album1.song_set.create(song_title='I love bcacon', file_type='mp3')
+<Song: I love bcacon>
+>>> album1.song_set.create(song_title='One', file_type='mp3')
+<Song: One>
+>>> album1.song_set.create(song_title='La negra tiene tumbaoo', file_type='mp3')
+<Song: La negra tiene tumbaoo>
+>>> song = album1.song_set.create(song_title='La negra tiene tumbaoo', file_type
+='mp3')
+>>> song.album
+<Album: red - Taylor Swift>
+>>> song.song_title
+'La negra tiene tumbaoo'
+>>> album1.song_set.all()
+<QuerySet [<Song: I hate my bf>, <Song: I love bcacon>, <Song: One>, <Song: La n
+egra tiene tumbaoo>, <Song: La negra tiene tumbaoo>]>
+>>> album1.song_set.count()
+5
+
+TUTO 22: simple form 
+C:\Users\pc\PycharmProjects\website>python manage.py makemigrations music
+Migrations for 'music':
+  music\migrations\0002_song_is_favorite.py
+    - Add field is_favorite to song
+
+C:\Users\pc\PycharmProjects\website>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, music, sessions
+Running migrations:
+  Applying music.0002_song_is_favorite... OK
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
